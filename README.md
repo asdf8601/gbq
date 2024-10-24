@@ -1,39 +1,33 @@
-# DruidQ
+# gbq
 
-Simple druid cli to query druid using sqlalchemy.
+Simple Google Big Query CLI that relies on `pandas_gbq`.
 
 
 ## Installation
 
 
 ```bash
-pipx install git+https://github.com/mmngreco/druidq
+pip install git+https://github.com/mmngreco/gbq
 ```
-
-> [!Note]
-> I you are on MacOS I recommend creating a new venv and avoid using `pipx`
 
 
 ## Usage
 
 ```bash
 # String
-druidq "select 1"
+gbq "select 1"
 
 # send python code
-druidq "select 1" -e "print(df)"
+gbq "select 1" -e "print(df)"
 
 # silent mode
-druidq "select 1" -e "print(df)" -q
+gbq "select 1" -e "print(df)" -q
 
 # no cache
-druidq "select 1" -e "print(df)" -f
+gbq "select 1" -e "print(df)" -f
 
 # file
-druidq ./query.sql
-# customs URLs
-DRUIDQ_URL='druid://localhost:8887/' druidq ./query.sql
-DRUIDQ_URL='druid://localhost:8082/druid/v2/sql/' druidq ./query.sql
+gbq ./query.sql
 ```
 
 
@@ -42,25 +36,24 @@ DRUIDQ_URL='druid://localhost:8082/druid/v2/sql/' druidq ./query.sql
 You can try the following:
 
 ```bash
-mkdir /tmp/druidq/
-cd /tmp/druidq/
+mkdir /tmp/gbq/
+cd /tmp/gbq/
 echo "select 1" > query.sql
-export DRUIDQ_URL='druid://localhost:8887/'
 
 # read query from a file
-druidq ./query.sql
-druidq ./query.sql -e "print(df.shape)"
+gbq ./query.sql
+gbq ./query.sql -e "print(df.shape)"
 
 # use python scrits
 echo "print(df.shape)" >> script.py
 echo "print(df.T)" >> script.py
-druidq ./query.sql -e ./script.py
+gbq ./query.sql -e ./script.py
 ```
 
 You can also use the `execute` function only
 
 ```python
-from druidq import execute
+from gbq import execute
 
 execute("select 1")
 ```
